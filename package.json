@@ -1,0 +1,37 @@
+{
+  "name": "jspeye",
+  "version": "0.0.0",
+  "description": "A command-line tool that identifies URLs and interesting assignments/expressions in JavaScript files",
+  "bin": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zbo14/jspeye"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bug-bounty",
+    "cli",
+    "http",
+    "https",
+    "recon",
+    "url",
+    "web-security"
+  ],
+  "author": "Zachary Balder",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "5.1.0",
+    "js-beautify": "1.11.0",
+    "url-regex": "5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "6.8.0",
+    "eslint-config-standard": "14.1.1",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1"
+  }
+}
