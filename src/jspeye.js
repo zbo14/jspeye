@@ -52,10 +52,6 @@ exports.url = async (url, opts) => {
     util.error('[!] Invalid url: ' + url)
   }
 
-  if (!util.isJS(url.pathname)) {
-    util.error('[!] Expected URL with .js extension')
-  }
-
   let delim = ','
   let headers = opts.headers || ''
 

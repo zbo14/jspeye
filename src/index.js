@@ -6,9 +6,9 @@ const jspeye = require('./jspeye')
 const program = new commander.Command()
 
 program
-  .version('1.0.0')
+  .version('0.0.0')
   .option('-m, --margin <int>', 'number of characters to show before/after match', 30)
-  .option('-o, --output <file>', 'write prettified JS to file for further inspection')
+  .option('-o, --output [file]', 'write prettified JS to file for further inspection')
   .option('-q, --quiet', 'don\'t print banner or info')
 
 program
@@ -21,6 +21,6 @@ program
   .description('examine JS at URL endpoint')
   .option('-H, --headers <headers/@file>', 'comma-separated list or file with request headers to send')
   .option('-k, --insecure', 'allow insecure TLS connections')
-  .action((url, opts) => jspeye.url(url, { ...opts.parent, headers: opts.headers }))
+  .action((url, opts) => jspeye.url(url, { ...opts.parent, ...opts }))
 
 module.exports = program

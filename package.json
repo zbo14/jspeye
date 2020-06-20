@@ -11,6 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "application-assessment",
     "bug-bounty",
     "cli",
     "http",

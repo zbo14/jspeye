@@ -2,6 +2,7 @@
 
 const http = require('http')
 const https = require('https')
+const zlib = require('zlib')
 const util = require('./util')
 
 const request = (url, opts) => new Promise((resolve, reject) => {
@@ -13,8 +14,6 @@ const request = (url, opts) => new Promise((resolve, reject) => {
   Object.entries(opts.headers || {}).forEach(([key, value]) => {
     headers[key.toLowerCase()] = value
   })
-
-  headers['accept-encoding'] = 'identity'
 
   get(url, { headers, rejectUnauthorized }, resp => {
     const { headers, statusCode } = resp
@@ -38,9 +37,25 @@ const request = (url, opts) => new Promise((resolve, reject) => {
     }
 
     let data = ''
+    let decompress
+
+    const encoding = headers['content-encoding']
+
+    if (encoding === 'br') {
+      decompress = zlib.createBrotliDecompress()
+    } else if (encoding === 'gzip') {
+      decompress = zlib.createGunzip()
+    } else if (encoding === 'deflate') {
+      decompress = zlib.createInflate()
+    }
 
     resp
       .once('end', () => resolve({ statusCode, headers, data }))
+      .once('error', reject)
+
+    const stream = decompress ? resp.pipe(decompress) : resp
+
+    stream
       .once('error', reject)
       .on('data', chunk => {
         data += chunk
